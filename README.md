@@ -4,7 +4,7 @@ Aura is a high-end, apartment search application designed for a premium user exp
 
 ![Aura Dashboard](https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=1200)
 
-## ✨ Core Features
+##   Core Features
 
 - **Interactive Map Search**: Explore properties across Hyderabad with a custom-styled Leaflet map.
 - **Advanced Filtering**: Filter listings by price range, number of rooms, and specific amenities.
@@ -13,7 +13,7 @@ Aura is a high-end, apartment search application designed for a premium user exp
 - **Saved Homes**: Keep track of favorites with a dedicated "Saved Homes" view.
 - **Responsive Design**: Fully optimized for various screen sizes and viewing modes.
 
-## 🚀 Technical Stack
+##   Technical Stack
 
 - **Framework**: [React 19](https://react.dev/)
 - **Build Tool**: [Vite](https://vitejs.dev/)
@@ -52,7 +52,7 @@ Aura is a high-end, apartment search application designed for a premium user exp
    npm run build
    ```
 
-## 📂 Project Architecture
+## Project Architecture
 
 - `src/components/`: Modular UI components (Navbar, Filtering, Detail Views).
 - `src/App.jsx`: Main application logic and state management.
