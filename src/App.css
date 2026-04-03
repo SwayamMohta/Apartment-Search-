@@ -1,0 +1,41 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.app-layout {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.map-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-secondary) !important;
+}
+
+.leaflet-container img {
+  max-width: none !important;
+}
+
+:root:not([data-theme="light"]) .leaflet-layer,
+:root:not([data-theme="light"]) .leaflet-control-zoom-in,
+:root:not([data-theme="light"]) .leaflet-control-zoom-out,
+:root:not([data-theme="light"]) .leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
