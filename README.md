@@ -59,6 +59,4 @@ Aura is a high-end, apartment search application designed for a premium user exp
 - `src/index.css`: Global design system and theme variables.
 - `public/`: Static assets and icons.
 
-## 📄 License & Attribution
 
-This project is open-source and intended for educational purposes.
