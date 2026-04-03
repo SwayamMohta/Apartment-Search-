@@ -1,6 +1,6 @@
 # Aura | Premium Apartment Search Platform
 
-Aura is a high-end, "Cyber-Minimalist" apartment search application designed for a premium user experience. Built with React and Vite, it features a sleek dark-themed UI (with a light-mode toggle), interactive mapping, and a robust property management system.
+Aura is a high-end, apartment search application designed for a premium user experience. Built with React and Vite, it features a interactive mapping, and a robust property management system.
 
 ![Aura Dashboard](https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=1200)
 
