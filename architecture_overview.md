@@ -1,31 +1,45 @@
 # Apartment Map Project: Technical Architecture Overview
 
-Here is a breakdown of the core technologies running your project, what they do, and why they were chosen:
+This document provides a breakdown of the core technologies, design principles, and architectural patterns used in the project.
 
 ## 1. Core Framework & Build Tool
 *   **React (v19)**: The foundational UI library. We use React to build encapsulated, reusable components (like the Navbar, Apartment Cards, Map, etc.) that manage their own state.
-*   **Vite**: The build tool and development server. 
-    *   *Why we chose it:* Vite is remarkably faster than the older Create-React-App. It provides instantaneous hot-module replacement (when you save a file, the browser updates instantly without a full page reload) and highly optimized production builds.
+*   **Vite**: The build tool and development server. It provides instantaneous hot-module replacement and highly optimized production builds.
 
 ## 2. The Map Engine
-*   **Leaflet & React-Leaflet**: The interactive map library.
-    *   *Why we chose it:* Leaflet is the leading open-source library for mobile-friendly interactive maps. It is extremely lightweight and doesn't require API keys or paid subscriptions like Google Maps. `react-leaflet` gives us specialized React components (like `<MapContainer>`, `<TileLayer>`, and `<Marker>`) so we can write our map declaratively within React.
-*   **OpenStreetMap (OSM)**: The map data provider.
-    *   *Why we chose it:* OSM is the "Wikipedia of Maps." It provides free, highly detailed map tiles that we fetch dynamically to render the streets and terrain on the screen.
+*   **Leaflet & React-Leaflet**: The interactive map library. Leaflet is lightweight and open-source, allowing for mobile-friendly interactive maps without the need for API keys.
+*   **OpenStreetMap (OSM)**: The map data provider, supplying the street and terrain tiles.
 
-## 3. Styling & Aesthetics
-*   **Tailwind CSS (v3)**: A utility-first CSS framework.
-    *   *Why we chose it:* Tailwind allows us to rapidly style components by applying pre-existing classes directly in the JSX (e.g., `flex items-center p-1.5 rounded-full`). It dramatically speeds up development and maintains a cohesive design system without having to bounce back and forth between CSS files constantly. Note: We recently downgraded from v4 to v3 to ensure it played nicely with our Leaflet map styles!
-*   **Vanilla CSS ([App.css](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/App.css), [index.css](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/index.css))**: Used for global variables, custom animations, and highly specific overrides.
-    *   *Why we chose it:* While Tailwind handles 90% of styling, pure CSS is still required for complex tasks like defining our absolute Dark/Light Mode color variables and fixing the specific `max-width` bugs that occur when Leaflet images clash with default browser resets.
-*   **Lucide-React**: The icon library.
-    *   *Why we chose it:* It provides clean, modern, and beautiful SVG icons (like the Search, User, Map, Sun, and Moon icons in the Navbar) that scale perfectly and can be colored dynamically with text classes.
+## 3. Styling & "Cyber-Minimalist" Design
+*   **Tailwind CSS (v3)**: A utility-first CSS framework used for rapid layout and component styling.
+*   **Design Philosophy**: The project follows a **Cyber-Minimalist / HUD (Heads-Up Display)** aesthetic.
+    *   **Glassmorphism**: Heavy use of backdrop-blur and semi-transparent backgrounds (`.glass-panel`) to create layered depth.
+    *   **Dark Mode Priority**: An ultra-dark theme (pure black `#000000` base) designed for high contrast and modern AI-style aesthetics.
+    *   **Custom UI Elements**: Implementation of universal HUD-style scrollbars and high-performance micro-animations.
+*   **Vanilla CSS**: Used in `index.css` for the global design system (CSS variables for colors, spacing, and typography) and component-specific files for complex overrides and animations.
+*   **Lucide-React**: Provides clean, modern SVG icons used throughout the navigation and UI.
+*   **Framer Motion**: Powers the smooth, physics-based spring animations, such as the fluid "hover pill" in the navbar and view transitions.
 
-## 4. Animations & Interactivity
-*   **Framer Motion**: The animation library.
-    *   *Why we chose it:* It is the premier animation library for React. It powers the incredibly smooth, complex physics-based spring animations in the application, such as the glowing hover pill in the Navbar that fluidly snaps between different menu items as you move your mouse. Doing this in pure CSS is incredibly difficult; Framer Motion makes it trivial.
+## 4. View Management & Routing
+Instead of a traditional URL-based router, the application uses **State-Driven View Switching** within [App.jsx](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/App.jsx). This allows for instant, fluid transitions between logical states:
+*   **Landing View**: The high-impact entry point for the application.
+*   **Map View**: The primary interactive search interface.
+*   **All Properties View**: A grid-based listing of all available apartments.
+*   **Saved Homes**: A dedicated area for user-shortlisted properties.
+*   **Admin Dashboard**: A restricted interface for property management (Add/Edit/Delete).
+*   **Detail View**: A full-page deep dive into a specific apartment's features and images.
 
-## 5. Summary of Key Files
-*   [App.jsx](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/App.jsx): The "control center." It holds the master state of the application (like which apartment is selected, whether the app is in Dark or Light mode, and whether the filters are visible) and orchestrates the other components.
-*   [CyberNavbar.jsx](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/components/CyberNavbar.jsx): The futuristic, condensing navigation menu that tracks your mouse movements.
-*   [index.css](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/index.css): The root stylesheet that dictates the core color variables for the Light and Dark themes, as well as the global font (`JetBrains Mono` and `Inter`).
+## 5. State Management
+The project uses a **Centralized State Model** in `App.jsx`:
+*   **Apartments State**: The source of truth for all property data, updated via the Admin interface.
+*   **Selection State**: Tracks which apartment is currently highlighted on the map or opened in detail view.
+*   **Filter State**: Stores user search criteria (price, rooms, etc.) which is applied in real-time to the displayed datasets.
+*   **Persistence (Future)**: The current setup is prepared for easy integration with `localStorage` or a backend API.
+
+## 6. Key Components Summary
+*   [App.jsx](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/App.jsx): The orchestrator. It holds the master state and handles top-level conditional rendering for views.
+*   [CyberNavbar.jsx](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/components/CyberNavbar.jsx): A futuristic, condensing navigation menu that tracks mouse movements for a premium feel.
+*   [FiltersPanel.jsx](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/components/FiltersPanel.jsx): A slide-out HUD panel that allows users to refine results with live counting logic.
+*   [AdminInterface.jsx](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/components/AdminInterface.jsx): The dashboard for CRUD operations on the apartment database.
+*   [ApartmentDetailView.jsx](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/components/ApartmentDetailView.jsx): An immersive content view for individual properties.
+*   [index.css](file:///c:/Users/mohta/Desktop/SE/Project/P2/src/index.css): The "Design System" root, containing all core color tokens and global variables.

@@ -1,0 +1,462 @@
+[
+  {
+    "title": "3 BHK Flat for Rent in Kokapet, Outer Ring Road, Hyderabad",
+    "locality": "Kokapet",
+    "description": "A beautiful 3 bedroom property strategically located in Kokapet, with an expansive area of 1361 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 70000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1361,
+    "rating": "4.8",
+    "coords": [
+      17.39514,
+      78.33454
+    ],
+    "amenities": [
+      "City View",
+      "Balcony",
+      "Power Backup",
+      "24/7 Security"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "1 BHK Flat for Rent in Kondapur, Hyderabad",
+    "locality": "Kondapur",
+    "description": "A beautiful 1 bedroom property strategically located in Kondapur, with an expansive area of 650 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 26000,
+    "beds": 1,
+    "baths": 1,
+    "area": 650,
+    "rating": "4.6",
+    "coords": [
+      17.46459,
+      78.35789
+    ],
+    "amenities": [
+      "Power Backup",
+      "WiFi",
+      "Gym",
+      "24/7 Security"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Kondapur, Hyderabad",
+    "locality": "Kondapur",
+    "description": "A beautiful 3 bedroom property strategically located in Kondapur, with an expansive area of 1800 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 55000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1800,
+    "rating": "4.1",
+    "coords": [
+      17.46087,
+      78.35979
+    ],
+    "amenities": [
+      "24/7 Security",
+      "Balcony",
+      "City View",
+      "Parking"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Kokapet, Outer Ring Road, Hyderabad",
+    "locality": "Kokapet",
+    "description": "A beautiful 3 bedroom property strategically located in Kokapet, with an expansive area of 1650 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 75000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1650,
+    "rating": "4.8",
+    "coords": [
+      17.40305,
+      78.33494
+    ],
+    "amenities": [
+      "WiFi",
+      "24/7 Security",
+      "Power Backup",
+      "Pool"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Kokapet, Outer Ring Road, Hyderabad",
+    "locality": "Kokapet",
+    "description": "A beautiful 3 bedroom property strategically located in Kokapet, with an expansive area of 1400 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 65000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1400,
+    "rating": "4.1",
+    "coords": [
+      17.40158,
+      78.32878
+    ],
+    "amenities": [
+      "Gym",
+      "WiFi",
+      "Pool",
+      "Parking"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1502672260266-1c1de2d9d06b?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "4 BHK Flat for Rent in Nandagiri Hills, Jubilee Hills, Hyderabad",
+    "locality": "Jubilee Hills",
+    "description": "A beautiful 4 bedroom property strategically located in Jubilee Hills, with an expansive area of 3500 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 150000,
+    "beds": 4,
+    "baths": 4,
+    "area": 3500,
+    "rating": "4.6",
+    "coords": [
+      17.42891,
+      78.40966
+    ],
+    "amenities": [
+      "Gym",
+      "Power Backup",
+      "24/7 Security",
+      "City View"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "5 BHK Flat for Rent in Malakunta Financial District, Hyderabad",
+    "locality": "Financial District",
+    "description": "A beautiful 5 bedroom property strategically located in Financial District, with an expansive area of 4500 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 200000,
+    "beds": 5,
+    "baths": 5,
+    "area": 4500,
+    "rating": "4.4",
+    "coords": [
+      17.41606,
+      78.3441
+    ],
+    "amenities": [
+      "City View",
+      "Balcony",
+      "WiFi",
+      "24/7 Security"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Kokapet, Outer Ring Road, Hyderabad",
+    "locality": "Kokapet",
+    "description": "A beautiful 3 bedroom property strategically located in Kokapet, with an expansive area of 1550 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 72000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1550,
+    "rating": "4.2",
+    "coords": [
+      17.3937,
+      78.33388
+    ],
+    "amenities": [
+      "Power Backup",
+      "Gym",
+      "Pool",
+      "Parking"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "1 BHK Flat for Rent in Hafeezpet, NH 9, Hyderabad",
+    "locality": "Hafeezpet",
+    "description": "A beautiful 1 bedroom property strategically located in Hafeezpet, with an expansive area of 600 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 22000,
+    "beds": 1,
+    "baths": 1,
+    "area": 600,
+    "rating": "4.3",
+    "coords": [
+      17.47786,
+      78.3442
+    ],
+    "amenities": [
+      "24/7 Security",
+      "Power Backup",
+      "Balcony",
+      "Parking"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Kondapur, Hyderabad",
+    "locality": "Kondapur",
+    "description": "A beautiful 3 bedroom property strategically located in Kondapur, with an expansive area of 1750 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 58000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1750,
+    "rating": "4.3",
+    "coords": [
+      17.45785,
+      78.35698
+    ],
+    "amenities": [
+      "Parking",
+      "City View",
+      "Balcony",
+      "WiFi"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Gachibowli, Hyderabad",
+    "locality": "Gachibowli",
+    "description": "A beautiful 3 bedroom property strategically located in Gachibowli, with an expansive area of 1700 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 66000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1700,
+    "rating": "4.2",
+    "coords": [
+      17.44162,
+      78.34803
+    ],
+    "amenities": [
+      "City View",
+      "Parking",
+      "Pool",
+      "Gym"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Narsingi, Outer Ring Road, Hyderabad",
+    "locality": "Narsingi",
+    "description": "A beautiful 3 bedroom property strategically located in Narsingi, with an expansive area of 1715 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 67000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1715,
+    "rating": "4.4",
+    "coords": [
+      17.38376,
+      78.35551
+    ],
+    "amenities": [
+      "Gym",
+      "Pool",
+      "Power Backup",
+      "Parking"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1502672260266-1c1de2d9d06b?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Narsingi, Outer Ring Road, Hyderabad",
+    "locality": "Narsingi",
+    "description": "A beautiful 3 bedroom property strategically located in Narsingi, with an expansive area of 1750 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 68000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1750,
+    "rating": "4.3",
+    "coords": [
+      17.38095,
+      78.35333
+    ],
+    "amenities": [
+      "24/7 Security",
+      "Power Backup",
+      "Parking",
+      "Balcony"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "2 BHK Flat for Rent in Saket, Secunderabad, Hyderabad",
+    "locality": "Saket, Secunderabad",
+    "description": "A beautiful 2 bedroom property strategically located in Saket, Secunderabad, with an expansive area of 1100 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 35000,
+    "beds": 2,
+    "baths": 2,
+    "area": 1100,
+    "rating": "4.5",
+    "coords": [
+      17.49861,
+      78.54146
+    ],
+    "amenities": [
+      "Power Backup",
+      "Gym",
+      "Pool",
+      "Parking"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Izzathnagar, Hyderabad",
+    "locality": "Izzathnagar",
+    "description": "A beautiful 3 bedroom property strategically located in Izzathnagar, with an expansive area of 1600 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 62000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1600,
+    "rating": "4.5",
+    "coords": [
+      17.46877,
+      78.37374
+    ],
+    "amenities": [
+      "Power Backup",
+      "Gym",
+      "City View",
+      "WiFi"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "4 BHK Flat for Rent in Gachibowli, Hyderabad",
+    "locality": "Gachibowli",
+    "description": "A beautiful 4 bedroom property strategically located in Gachibowli, with an expansive area of 2500 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 95000,
+    "beds": 4,
+    "baths": 4,
+    "area": 2500,
+    "rating": "4.4",
+    "coords": [
+      17.44192,
+      78.34706
+    ],
+    "amenities": [
+      "24/7 Security",
+      "Balcony",
+      "Power Backup",
+      "Gym"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Power Welfare Society, Hyderabad",
+    "locality": "Power Welfare Society",
+    "description": "A beautiful 3 bedroom property strategically located in Power Welfare Society, with an expansive area of 1450 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 45000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1450,
+    "rating": "4.7",
+    "coords": [
+      17.45517,
+      78.35801
+    ],
+    "amenities": [
+      "Gym",
+      "Power Backup",
+      "Parking",
+      "City View"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Puppalguda, Hyderabad",
+    "locality": "Puppalguda",
+    "description": "A beautiful 3 bedroom property strategically located in Puppalguda, with an expansive area of 1650 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 60000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1650,
+    "rating": "4.8",
+    "coords": [
+      17.39373,
+      78.38905
+    ],
+    "amenities": [
+      "24/7 Security",
+      "WiFi",
+      "Power Backup",
+      "Parking"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in Narsingi, Outer Ring Road, Hyderabad",
+    "locality": "Narsingi",
+    "description": "A beautiful 3 bedroom property strategically located in Narsingi, with an expansive area of 1600 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 64000,
+    "beds": 3,
+    "baths": 3,
+    "area": 1600,
+    "rating": "4.1",
+    "coords": [
+      17.38489,
+      78.35924
+    ],
+    "amenities": [
+      "24/7 Security",
+      "Parking",
+      "City View",
+      "Power Backup"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1502672260266-1c1de2d9d06b?auto=format&fit=crop&q=80&w=800"
+    ]
+  },
+  {
+    "title": "3 BHK Flat for Rent in DLF Cyber City, Gachibowli, Outer Ring Road, Hyderabad",
+    "locality": "Gachibowli",
+    "description": "A beautiful 3 bedroom property strategically located in Gachibowli, with an expansive area of 2200 sqft. Perfect for a premium lifestyle with all modern amenities.",
+    "price": 85000,
+    "beds": 3,
+    "baths": 3,
+    "area": 2200,
+    "rating": "4.8",
+    "coords": [
+      17.44149,
+      78.34514
+    ],
+    "amenities": [
+      "Gym",
+      "24/7 Security",
+      "Power Backup",
+      "WiFi"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80&w=800"
+    ]
+  }
+]

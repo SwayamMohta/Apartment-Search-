@@ -1,63 +1,52 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { ArrowLeft, MapPin, Heart, ExternalLink } from 'lucide-react';
+import ApartmentPreviewCard from './ApartmentPreviewCard';
 import './SavedApartmentsView.css';
 
 export default function SavedApartmentsView({ apartments, onBack, onViewDetails, onToggleSave }) {
   return (
-    <div className="saved-view-container">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="saved-view"
+    >
       <header className="premium-header">
         <div className="premium-header-left">
-          <button className="icon-btn-clean" onClick={onBack}>
+          <button className="icon-btn-clean back-btn" onClick={onBack} aria-label="Go back">
             <ArrowLeft size={18} />
             <span>Back</span>
           </button>
-          <h1>Saved Homes</h1>
+          <h1>Saved Collection</h1>
         </div>
         <div className="premium-header-right">
-          <span className="subtitle">{apartments.length} homes saved</span>
+          <span className="subtitle">{apartments.length} homes in your collection</span>
         </div>
       </header>
 
-      {apartments.length === 0 ? (
-        <div className="saved-empty">
-          <Heart size={48} strokeWidth={1} />
-          <h2>No saved homes yet</h2>
-          <p>Tap the heart icon on any property to save it here.</p>
-          <button className="back-btn" onClick={onBack}>Browse Properties</button>
-        </div>
-      ) : (
-        <div className="saved-grid">
-          {apartments.map(apt => (
-            <div key={apt.id} className="saved-card glass-panel">
-              <div className="saved-image-wrapper">
-                <img src={apt.images?.[0] || apt.image} alt={apt.title} />
-                <div className="price-badge">₹{apt.price.toLocaleString()}/mo</div>
-                <button
-                  className="saved-unsave-btn"
-                  onClick={() => onToggleSave && onToggleSave(apt.id)}
-                  title="Remove from saved"
-                >
-                  <Heart size={16} fill="currentColor" />
-                </button>
-              </div>
-              <div className="saved-info">
-                <h3>{apt.title}</h3>
-                <p className="location-text"><MapPin size={14} /> {apt.location}</p>
-                <div className="saved-specs">
-                  <span>{apt.beds} Beds</span> • <span>{apt.baths} Baths</span> • <span>{apt.area} sqft</span>
-                </div>
-                <button
-                  className="view-details-btn"
-                  onClick={() => onViewDetails && onViewDetails(apt)}
-                >
-                  <ExternalLink size={14} />
-                  View Details
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+      <div className="saved-container">
+        {apartments.length === 0 ? (
+          <div className="saved-empty-editorial">
+            <Heart size={48} strokeWidth={0.5} className="empty-icon" />
+            <h2>Your collection is empty</h2>
+            <p>Curate your ideal living spaces by saving them to this private collection.</p>
+            <button className="btn-primary" onClick={onBack}>Explore Gallery</button>
+          </div>
+        ) : (
+          <div className="saved-list">
+            {apartments.map(apt => (
+              <ApartmentPreviewCard
+                key={apt.id}
+                apartment={apt}
+                onViewDetails={onViewDetails}
+                isEmbedded={true}
+                isSaved={true}
+                onToggleSave={() => onToggleSave && onToggleSave(apt.id)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </motion.div>
   );
 }
