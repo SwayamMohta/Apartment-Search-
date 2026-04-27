@@ -1,69 +1,58 @@
 // src/config/db.js
-// PostgreSQL database connection setup using pg.
-import pkg from 'pg';
-const { Pool } = pkg;
-import dotenv from 'dotenv';
+// SQLite database connection using better-sqlite3 (local, zero-config).
+import Database from 'better-sqlite3';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import logger from '../utils/logger.js';
 
-dotenv.config();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DB_PATH = path.join(__dirname, '../../app.sqlite');
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
+const db = new Database(DB_PATH);
+db.pragma('journal_mode = WAL');
+db.pragma('foreign_keys = ON');
 
-pool.on('error', (err) => {
-  logger.error('Unexpected error on idle database client', { error: err.message });
-});
+logger.info('Connected to SQLite database at ' + DB_PATH);
 
-pool.on('connect', () => {
-  logger.info('Connected to PostgreSQL database');
-});
+// Convert PostgreSQL $1, $2 params to SQLite ?
+const toSQLite = (sql) => sql.replace(/\$\d+/g, '?');
+// Strip RETURNING clause (handled separately by caller using findById)
+const stripReturning = (sql) => sql.replace(/\s+RETURNING\s+\S+/gi, '');
 
 /**
- * Promise-based query helper.
- * Returns { rows } to match previous SQLite helper.
+ * Run a SELECT that returns multiple rows.
  */
 export const query = async (sql, params = []) => {
   try {
-    const res = await pool.query(sql, params);
-    return { rows: res.rows, rowCount: res.rowCount };
+    const rows = db.prepare(toSQLite(sql)).all(params);
+    return { rows, rowCount: rows.length };
   } catch (err) {
-    logger.error('Database query error', { sql, params, error: err.message });
+    logger.error('Database query error', { error: err.message });
     throw err;
   }
 };
 
 /**
- * Promise-based single row helper.
+ * Run a SELECT that returns a single row.
  */
 export const get = async (sql, params = []) => {
   try {
-    const res = await pool.query(sql, params);
-    return res.rows[0];
+    return db.prepare(toSQLite(sql)).get(params);
   } catch (err) {
-    logger.error('Database get error', { sql, params, error: err.message });
+    logger.error('Database get error', { error: err.message });
     throw err;
   }
 };
 
 /**
- * Promise-based run helper (for INSERT/UPDATE/DELETE).
- * PostgreSQL returns metadata in the result.
+ * Run an INSERT / UPDATE / DELETE.
  */
 export const run = async (sql, params = []) => {
   try {
-    const res = await pool.query(sql, params);
-    // Normalize to match SQLite's 'lastID' and 'changes' if possible.
-    // We expect repos to use RETURNING for lastID.
-    return { 
-      lastID: res.rows[0]?.id || null, 
-      changes: res.rowCount 
-    };
+    const result = db.prepare(toSQLite(stripReturning(sql))).run(params);
+    return { lastID: result.lastInsertRowid, changes: result.changes };
   } catch (err) {
-    logger.error('Database run error', { sql, params, error: err.message });
+    logger.error('Database run error', { error: err.message });
     throw err;
   }
 };
@@ -71,19 +60,6 @@ export const run = async (sql, params = []) => {
 /**
  * Transaction helper.
  */
-export const transaction = async (fn) => {
-  const client = await pool.connect();
-  try {
-    await client.query('BEGIN');
-    const result = await fn(client); // Notice: we pass client if needed, but the wrappers use the pool
-    await client.query('COMMIT');
-    return result;
-  } catch (err) {
-    await client.query('ROLLBACK');
-    throw err;
-  } finally {
-    client.release();
-  }
-};
+export const transaction = async (fn) => db.transaction(fn)();
 
-export default { query, get, run, transaction, pool };
+export default { query, get, run, transaction };

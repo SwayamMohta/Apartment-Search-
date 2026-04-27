@@ -41,7 +41,7 @@ export const getAnalyticsOverview = async () => {
   const apts   = await db.get('SELECT COUNT(*) as count FROM apartments WHERE is_active = 1');
   const users  = await db.get("SELECT COUNT(*) as count FROM users WHERE role = 'user'");
   const saves  = await db.get('SELECT COUNT(*) as count FROM saved_homes');
-  const newApts = await db.get("SELECT COUNT(*) as count FROM apartments WHERE is_active = 1 AND created_at > CURRENT_DATE - INTERVAL '30 days'");
+  const newApts = await db.get("SELECT COUNT(*) as count FROM apartments WHERE is_active = 1 AND created_at > datetime('now', '-30 days')");
   
   return {
     total_apartments: parseInt(apts.count),

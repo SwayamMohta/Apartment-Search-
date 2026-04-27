@@ -196,9 +196,11 @@ export default function ApartmentDetailView({ apartment, onBack, isSaved, onTogg
                 ) : pois.length > 0 ? (
                   <div className="neighborhood-grid">
                     {Object.entries({
-                      'Health': pois.filter(p => ['hospital', 'clinic'].includes(p.type)),
-                      'Education': pois.filter(p => ['college', 'school', 'university'].includes(p.type)),
-                      'Transit': pois.filter(p => ['train_station', 'bus_station', 'transit'].includes(p.type))
+                      'Health':     pois.filter(p => ['hospital', 'clinic', 'pharmacy', 'doctors'].includes(p.type) && p.name),
+                      'Education':  pois.filter(p => ['college', 'school', 'university'].includes(p.type) && p.name),
+                      'Transit':    pois.filter(p => ['train_station', 'bus_station', 'transit', 'subway_entrance', 'railway'].includes(p.type) && p.name),
+                      'Dining':     pois.filter(p => ['cafe', 'restaurant', 'fast_food', 'food_court'].includes(p.type) && p.name),
+                      'Landmarks':  pois.filter(p => ['temple', 'mosque', 'church', 'place_of_worship', 'park', 'library'].includes(p.type) && p.name),
                     }).filter(([_, items]) => items.length > 0).map(([category, items]) => {
                       const uniqueItems = Array.from(new Map(items.map(p => [p.name || p.type, p])).values()).slice(0, 3);
                       return (

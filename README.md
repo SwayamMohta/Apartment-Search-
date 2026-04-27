@@ -1,46 +1,242 @@
 # Elevé
-### Architectural Curation and Residential Discovery
+### Apartment Search & Residential Discovery Platform
 
-Elevé represents a departure from conventional property search interfaces. It is a technical manifestation of architectural curation, designed specifically for those who view a residence as an extension of intentional living. The platform prioritizes high-contrast clarity, structural whitespace, and the removal of digital clutter to facilitate a deliberate discovery process.
+Elevé is a full-stack apartment search application built for geographic property discovery. It combines an interactive map interface with a curated listings view, user authentication, saved collections, and an admin dashboard — all presented through a premium editorial design system.
 
-## Design Philosophy
+---
 
-The aesthetic framework of Elevé is built upon the concept of Subtle Sophistication. Rather than relying on the saturated tones of contemporary software, the system employs a Warm Charcoal palette that emphasizes neutral depth and legibility. Every interface element is positioned with geometric intent, utilizing asymmetrical layouts that draw inspiration from premium editorial design. This human-centric approach ensures the technology remains subservient to the architectural assets it presents.
+## Tech Stack
 
-## Technical Architecture
+### Frontend
+| Technology | Version | Purpose |
+|---|---|---|
+| React | 19 | UI framework |
+| Vite | 7 | Build tool & dev server |
+| React Router DOM | 7 | Client-side routing |
+| React Leaflet + Leaflet | 5 / 1.9 | Interactive map |
+| Framer Motion | 12 | Animations & transitions |
+| Axios | 1.15 | HTTP client |
+| Lucide React | 0.577 | Icon library |
+| Tailwind CSS | 3.4 | Utility CSS (dev) |
 
-The platform is engineered as a robust full-stack ecosystem, bridging modern frontend responsiveness with an enterprise-grade backend foundation.
+### Backend
+| Technology | Version | Purpose |
+|---|---|---|
+| Node.js | ≥ 18 | Runtime |
+| Express | 4.21 | HTTP server & routing |
+| better-sqlite3 | 12 | Primary SQLite database |
+| JWT (jsonwebtoken) | 9 | Access & refresh token auth |
+| bcrypt | 5 | Password hashing |
+| Zod | 3 | Request schema validation |
+| Helmet | 8 | Security headers |
+| express-rate-limit | 7 | Global rate limiting |
+| Morgan + Winston | — | HTTP & application logging |
+| Multer | 1.4 | Image/file uploads |
+| CORS | 2.8 | Cross-origin resource sharing |
 
-#### Frontend Specification
-The user interface is constructed with React 19 and Vite, ensuring near-instantaneous load times and seamless state transitions. The styling is governed by a global CSS variable system that manages the transition between light and dark editorial modes without the use of third-party utility frameworks. Motion is handled via Framer Motion, utilizing refined easing curves to simulate the tactile feel of high-end physical media.
+---
 
-#### Backend Infrastructure
-The infrastructure is powered by a Node.js and Express server, providing a secure API layer for property management and user interactions. Data persistence is managed through a PostgreSQL instance hosted on Supabase, offering superior relational data integrity and cloud scalability. The system implements JSON Web Token (JWT) standards for session security alongside Zod-driven schema validation to maintain strict data quality.
+## Project Structure
 
-## Core Capabilities
+```
+P2/
+├── src/                        # Frontend (React + Vite)
+│   ├── api/                    # Axios API call modules
+│   ├── components/             # React components
+│   │   ├── AdminInterface      # Admin CRUD dashboard
+│   │   ├── AllPropertiesView   # Grid/list browse view
+│   │   ├── ApartmentDetailView # Full-page property detail
+│   │   ├── ApartmentPreviewCard# Map popup preview card
+│   │   ├── FiltersPanel        # Filter modal (price, rooms, amenities)
+│   │   ├── LandingView         # Homepage / hero section
+│   │   ├── LoginView           # Auth modal (login/register)
+│   │   ├── PrimaryNavbar       # Top navigation bar
+│   │   ├── SavedApartmentsView # Saved properties list
+│   │   ├── SavedUnauthorizedView # Prompt to login for saved
+│   │   └── UniversalNavbar     # Theme-aware nav wrapper
+│   ├── context/
+│   │   ├── AuthContext.jsx     # User authentication state
+│   │   └── ThemeContext.jsx    # Light / dark theme state
+│   ├── App.jsx                 # Root app, routing, map logic
+│   └── main.jsx                # React entry point
+│
+├── backend/
+│   ├── src/
+│   │   ├── app.js              # Express app factory
+│   │   ├── config/             # Environment validation (envalid)
+│   │   ├── db/                 # Migrations, seed, SQLite setup
+│   │   │   ├── migrate.js      # Schema migration runner
+│   │   │   ├── seed.js         # Sample data seeder
+│   │   │   └── migrations/     # SQL migration files
+│   │   ├── middleware/
+│   │   │   ├── auth.middleware.js        # JWT verification
+│   │   │   ├── role.middleware.js        # Admin role guard
+│   │   │   ├── validate.middleware.js   # Zod schema validation
+│   │   │   ├── rateLimit.middleware.js  # Global rate limiter
+│   │   │   └── errorHandler.middleware.js
+│   │   ├── modules/
+│   │   │   ├── auth/           # Register, login, refresh, logout
+│   │   │   ├── apartments/     # CRUD for listings + filtering
+│   │   │   ├── saved/          # Save / unsave apartments per user
+│   │   │   └── admin/          # Admin-only management routes
+│   │   └── utils/              # Logger (Winston) and helpers
+│   ├── uploads/                # Uploaded apartment images
+│   ├── app.sqlite              # SQLite database file
+│   ├── server.js               # HTTP server binding
+│   └── .env.example            # Environment variable template
+│
+├── pois.db                     # SQLite DB for Points of Interest data
+├── index.html                  # Vite HTML entry
+├── vite.config.js
+└── package.json
+```
 
-The platform centers on three primary pillars of residential engagement.
+---
 
-#### Spatial Exploration
-A custom-styled mapping interface allows for the geographic discovery of properties. Each listing is augmented with Point of Interest (POI) metadata, providing critical context regarding neighborhood landmarks, transit hubs, and educational institutions.
+## API Routes
 
-#### Private Collections
-Registered users can maintain a curated collection of residences. This persistent system allows for the long-term observation of properties and the management of personal preferences within a secure, authenticated environment.
+All backend routes are prefixed with `/api/v1`.
 
-#### High-Touch Engagement
-Moving beyond generic contact forms, Elevé features specialized handlers for private tour requests and detailed enquiries. These interactions are managed through compact, non-intrusive interfaces designed to fit perfectly within standard architectural viewports.
+### Auth — `/api/v1/auth`
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/register` | Public | Create a new user account |
+| POST | `/login` | Public | Login and receive JWT cookies |
+| POST | `/refresh` | Public | Refresh access token via cookie |
+| POST | `/logout` | Public | Clear auth cookies |
 
-## Configuration and Implementation
+### Apartments — `/api/v1/apartments`
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| GET | `/` | Public | List all apartments (supports filters) |
+| GET | `/:id` | Public | Get single apartment detail + POIs |
+| POST | `/` | Admin | Create a new apartment listing |
+| PUT | `/:id` | Admin | Update an apartment listing |
+| DELETE | `/:id` | Admin | Delete an apartment listing |
 
-To establish a local instance of the Elevé platform, the following procedures are required.
+**Query params for `GET /`:** `minPrice`, `maxPrice`, `beds`, `amenities` (comma-separated)
 
-#### Preliminary Requirements
-Establishment of a Node.js environment version 18 or higher is necessary. A remote or local PostgreSQL instance must be available for data persistence.
+### Saved — `/api/v1/users`
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| GET | `/me/saved` | User | Get all saved apartments for current user |
+| POST | `/me/saved/:id` | User | Save an apartment |
+| DELETE | `/me/saved/:id` | User | Unsave an apartment |
 
-#### Backend Deployment
-Navigate to the backend directory and initiate the dependency installation process via the package manager. Configure the environment variables to include the database connection string and authentication secrets. Execute the migration logic to establish the formal schema.
+### Admin — `/api/v1/admin`
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| GET | `/users` | Admin | List all registered users |
 
-#### Application Launch
-Return to the root directory and initiate the development server. The platform will be accessible via the localized host environment, providing full access to both the discovery interface and the administrative dashboard.
+### Health Check
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/health` | Server health status + timestamp |
 
-Elevé. Curated Living, Defined.
+---
+
+## Core Features
+
+- **Interactive Map** — Browse apartments on a Leaflet map with custom price-pill markers. Light/dark map tiles switch with the theme.
+- **Property Discovery** — Grid-based `/discover` view of all listings with filter and sort support.
+- **Apartment Detail** — Full detail overlay with images, amenities, price, BHK info, and nearby Points of Interest.
+- **Filters** — Spotlight-style modal for filtering by price range, number of rooms, and amenities.
+- **Authentication** — JWT-based login/register with httpOnly refresh token cookies. Access tokens refresh silently.
+- **Saved Apartments** — Authenticated users can save/unsave properties with persistent state.
+- **Admin Dashboard** — Role-protected interface for adding, editing, and deleting listings with image upload.
+- **Theme System** — Light and dark editorial modes managed via React Context.
+
+---
+
+## Local Setup
+
+### Prerequisites
+- **Node.js** ≥ 18
+- **npm**
+
+---
+
+### 1. Backend
+
+```bash
+cd backend
+npm install
+```
+
+Copy the example env file and fill in values:
+```bash
+cp .env.example .env
+```
+
+```env
+PORT=3001
+NODE_ENV=development
+FRONTEND_URL=http://localhost:5173
+JWT_ACCESS_SECRET=your_access_secret
+JWT_REFRESH_SECRET=your_refresh_secret
+```
+
+Run database migrations and optionally seed sample data:
+```bash
+npm run migrate
+npm run seed     # optional — loads sample apartment listings
+```
+
+Start the backend dev server:
+```bash
+npm run dev      # uses nodemon, restarts on changes
+```
+
+Backend runs at: `http://localhost:3001`
+
+---
+
+### 2. Frontend
+
+From the project root (`P2/`):
+```bash
+npm install
+npm run dev
+```
+
+Frontend runs at: `http://localhost:5173`
+
+---
+
+### 3. Running Both Together
+
+Open two terminals:
+
+**Terminal 1 — Backend:**
+```bash
+cd backend && npm run dev
+```
+
+**Terminal 2 — Frontend:**
+```bash
+npm run dev
+```
+
+---
+
+## Environment Variables Reference
+
+| Variable | Required | Default | Description |
+|---|---|---|---|
+| `PORT` | No | `3001` | Backend server port |
+| `NODE_ENV` | No | `development` | Runtime environment |
+| `FRONTEND_URL` | Yes | — | Allowed CORS origin |
+| `JWT_ACCESS_SECRET` | Yes | — | Secret for signing access tokens |
+| `JWT_REFRESH_SECRET` | Yes | — | Secret for signing refresh tokens |
+
+> The backend uses **SQLite** (`app.sqlite`) by default — no external database setup needed.
+
+---
+
+## Default Admin Access
+
+After seeding, an admin account is created. Check `backend/src/db/seed.js` for credentials, or register a user and manually set `role = 'admin'` in the SQLite database.
+
+---
+
+*Elevé — Curated Living, Defined.*

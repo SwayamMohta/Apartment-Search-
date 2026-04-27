@@ -20,7 +20,7 @@ export const findAll = async ({ limit, offset, minPrice, maxPrice, beds, locatio
   if (minPrice) { params.push(minPrice); where.push(`a.price >= $${pIdx++}`); }
   if (maxPrice) { params.push(maxPrice); where.push(`a.price <= $${pIdx++}`); }
   if (beds)     { params.push(parseInt(beds)); where.push(`a.beds = $${pIdx++}`); }
-  if (location) { params.push(`%${location}%`); where.push(`a.location ILIKE $${pIdx++}`); }
+  if (location) { params.push(`%${location}%`); where.push(`a.location LIKE $${pIdx++}`); }
 
   const sortMap = {
     price_asc:   'a.price ASC',
@@ -36,7 +36,7 @@ export const findAll = async ({ limit, offset, minPrice, maxPrice, beds, locatio
 
   const savedSubquery = userId
     ? `(SELECT 1 FROM saved_homes sh WHERE sh.apartment_id = a.id AND sh.user_id = $${pIdx++})`
-    : '0';
+    : 'NULL';
   if (userId) params.push(userId);
 
   const limitIdx = pIdx++;
@@ -47,11 +47,11 @@ export const findAll = async ({ limit, offset, minPrice, maxPrice, beds, locatio
     `SELECT
        a.id, a.title, a.location, a.price, a.beds, a.baths, a.area, a.rating,
        a.lat, a.lng, a.created_at,
-       CASE WHEN ${savedSubquery} = '1' THEN 1 ELSE 0 END AS isSaved,
-       (SELECT COALESCE(json_agg(am.name), '[]'::json)
+       CASE WHEN ${savedSubquery} IS NOT NULL THEN 1 ELSE 0 END AS isSaved,
+       (SELECT COALESCE(json_group_array(am.name), '[]')
         FROM apartment_amenities aa JOIN amenities am ON aa.amenity_id = am.id
         WHERE aa.apartment_id = a.id) AS amenities,
-       (SELECT COALESCE(json_agg(json_build_object('id', ai.id, 'url', ai.url, 'is_cover', ai.is_cover)), '[]'::json)
+       (SELECT COALESCE(json_group_array(json_object('id', ai.id, 'url', ai.url, 'is_cover', ai.is_cover)), '[]')
         FROM apartment_images ai WHERE ai.apartment_id = a.id) AS images
      FROM apartments a
      WHERE ${whereClause}
@@ -75,11 +75,11 @@ export const findById = async (id, userId) => {
     `SELECT
        a.id, a.title, a.description, a.location, a.price, a.beds, a.baths,
        a.area, a.rating, a.created_at, a.updated_at, a.lat, a.lng,
-       CASE WHEN ${savedSubquery} = '1' THEN 1 ELSE 0 END AS isSaved,
-       (SELECT COALESCE(json_agg(am.name), '[]'::json)
+       CASE WHEN ${savedSubquery} IS NOT NULL THEN 1 ELSE 0 END AS isSaved,
+       (SELECT COALESCE(json_group_array(am.name), '[]')
         FROM apartment_amenities aa JOIN amenities am ON aa.amenity_id = am.id
         WHERE aa.apartment_id = a.id) AS amenities,
-       (SELECT COALESCE(json_agg(json_build_object('id', ai.id, 'url', ai.url, 'is_cover', ai.is_cover, 'sort_order', ai.sort_order)), '[]'::json)
+       (SELECT COALESCE(json_group_array(json_object('id', ai.id, 'url', ai.url, 'is_cover', ai.is_cover, 'sort_order', ai.sort_order)), '[]')
         FROM apartment_images ai WHERE ai.apartment_id = a.id) AS images
      FROM apartments a
      WHERE a.id = $1 AND a.is_active = 1`,

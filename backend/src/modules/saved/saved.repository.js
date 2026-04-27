@@ -6,10 +6,10 @@ export const getSavedByUser = async (userId) => {
     `SELECT
        a.id, a.title, a.location, a.price, a.beds, a.baths, a.area, a.rating,
        a.lat, a.lng, sh.saved_at,
-       (SELECT COALESCE(json_agg(am.name), '[]'::json)
+       (SELECT COALESCE(json_group_array(am.name), '[]')
         FROM apartment_amenities aa JOIN amenities am ON aa.amenity_id = am.id
         WHERE aa.apartment_id = a.id) AS amenities,
-       (SELECT COALESCE(json_agg(json_build_object('id', ai.id, 'url', ai.url, 'is_cover', ai.is_cover)), '[]'::json)
+       (SELECT COALESCE(json_group_array(json_object('id', ai.id, 'url', ai.url, 'is_cover', ai.is_cover)), '[]')
         FROM apartment_images ai WHERE ai.apartment_id = a.id) AS images
      FROM saved_homes sh
      JOIN apartments a ON sh.apartment_id = a.id
