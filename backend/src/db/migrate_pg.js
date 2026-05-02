@@ -13,10 +13,25 @@ async function migrate() {
   try {
     const schemaSql = fs.readFileSync(SCHEMA_PATH, 'utf8');
     
-    // Execute the schema SQL
-    // pg-pool doesn't support executing multiple statements in one query call if they contain non-parameterized parts easily,
-    // but the 'pg' library actually handles a string of SQL fine if it's just one query call.
-    await db.query(schemaSql);
+    // Split SQL by semicolons to execute statements individually
+    // This is more reliable for large schema files
+    const statements = schemaSql
+      .split(';')
+      .map(s => s.trim())
+      .filter(s => s.length > 0);
+
+    console.log(`📦 Found ${statements.length} SQL statements to execute.`);
+
+    for (let i = 0; i < statements.length; i++) {
+      try {
+        await db.query(statements[i]);
+      } catch (err) {
+        console.error(`❌ Error in statement #${i + 1}:`);
+        console.error(`SQL: ${statements[i]}`);
+        console.error(`Error: ${err.message}`);
+        process.exit(1);
+      }
+    }
     
     console.log('✅ Schema applied successfully.');
     process.exit(0);
