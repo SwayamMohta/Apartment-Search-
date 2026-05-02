@@ -48,10 +48,10 @@ export const findAll = async ({ limit, offset, minPrice, maxPrice, beds, locatio
        a.id, a.title, a.location, a.price, a.beds, a.baths, a.area, a.rating,
        a.lat, a.lng, a.created_at,
        CASE WHEN ${savedSubquery} IS NOT NULL THEN 1 ELSE 0 END AS isSaved,
-       (SELECT COALESCE(json_group_array(am.name), '[]')
+       (SELECT COALESCE(json_agg(am.name), '[]'::json)
         FROM apartment_amenities aa JOIN amenities am ON aa.amenity_id = am.id
         WHERE aa.apartment_id = a.id) AS amenities,
-       (SELECT COALESCE(json_group_array(json_object('id', ai.id, 'url', ai.url, 'is_cover', ai.is_cover)), '[]')
+       (SELECT COALESCE(json_agg(json_build_object('id', ai.id, 'url', ai.url, 'is_cover', ai.is_cover)), '[]'::json)
         FROM apartment_images ai WHERE ai.apartment_id = a.id) AS images
      FROM apartments a
      WHERE ${whereClause}
@@ -76,10 +76,10 @@ export const findById = async (id, userId) => {
        a.id, a.title, a.description, a.location, a.price, a.beds, a.baths,
        a.area, a.rating, a.created_at, a.updated_at, a.lat, a.lng,
        CASE WHEN ${savedSubquery} IS NOT NULL THEN 1 ELSE 0 END AS isSaved,
-       (SELECT COALESCE(json_group_array(am.name), '[]')
+       (SELECT COALESCE(json_agg(am.name), '[]'::json)
         FROM apartment_amenities aa JOIN amenities am ON aa.amenity_id = am.id
         WHERE aa.apartment_id = a.id) AS amenities,
-       (SELECT COALESCE(json_group_array(json_object('id', ai.id, 'url', ai.url, 'is_cover', ai.is_cover, 'sort_order', ai.sort_order)), '[]')
+       (SELECT COALESCE(json_agg(json_build_object('id', ai.id, 'url', ai.url, 'is_cover', ai.is_cover, 'sort_order', ai.sort_order)), '[]'::json)
         FROM apartment_images ai WHERE ai.apartment_id = a.id) AS images
      FROM apartments a
      WHERE a.id = $1 AND a.is_active = 1`,
