@@ -2,13 +2,13 @@
 -- Combined schema for Apartment Search Platform (PostgreSQL/Supabase)
 
 -- Drop tables if they exist (for clean setup)
+DROP TABLE IF EXISTS audit_logs;
 DROP TABLE IF EXISTS saved_homes;
 DROP TABLE IF EXISTS apartment_images;
 DROP TABLE IF EXISTS apartment_amenities;
 DROP TABLE IF EXISTS amenities;
 DROP TABLE IF EXISTS apartments;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS audit_logs;
 DROP TABLE IF EXISTS pois;
 
 -- Users Table
