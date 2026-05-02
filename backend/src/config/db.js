@@ -1,4 +1,5 @@
 // src/config/db.js
+import 'dotenv/config';
 // PostgreSQL database connection using pg (Supabase).
 import pg from 'pg';
 import logger from '../utils/logger.js';

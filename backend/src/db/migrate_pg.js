@@ -1,4 +1,5 @@
 // src/db/migrate_pg.js
+import 'dotenv/config';
 import db from '../config/db.js';
 import fs from 'fs';
 import path from 'path';
