@@ -19,7 +19,7 @@ export const getSavedByUser = async (userId) => {
   );
   return rows.map(r => ({
     ...r,
-    coords: { lat: r.lat, lng: r.lng },
+    coords: { lat: parseFloat(r.lat), lng: parseFloat(r.lng) },
     amenities: Array.isArray(r.amenities) ? r.amenities : (typeof r.amenities === 'string' ? JSON.parse(r.amenities) : (r.amenities || [])),
     images:    Array.isArray(r.images)    ? r.images    : (typeof r.images === 'string'    ? JSON.parse(r.images)    : (r.images || [])),
     isSaved: true

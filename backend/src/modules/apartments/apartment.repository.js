@@ -6,7 +6,7 @@ const formatApartment = (row) => {
   const { lat, lng, amenities, images, ...rest } = row;
   return {
     ...rest,
-    coords:    { lat, lng },
+    coords:    { lat: parseFloat(lat), lng: parseFloat(lng) },
     amenities: Array.isArray(amenities) ? amenities : (typeof amenities === 'string' ? JSON.parse(amenities) : (amenities || [])),
     images:    Array.isArray(images)    ? images    : (typeof images === 'string'    ? JSON.parse(images)    : (images || [])),
   };
@@ -101,7 +101,7 @@ export const findInBounds = async ({ swLat, swLng, neLat, neLng }) => {
      LIMIT 200`,
     [swLat, neLat, swLng, neLng]
   );
-  return rows.map(r => ({ ...r, coords: { lat: r.lat, lng: r.lng } }));
+  return rows.map(r => ({ ...r, coords: { lat: parseFloat(r.lat), lng: parseFloat(r.lng) } }));
 };
 
 export const findInRadius = async ({ lat, lng, radiusKm }) => {
@@ -125,10 +125,12 @@ export const findInRadius = async ({ lat, lng, radiusKm }) => {
 
   // Simple Euclidean distance in JS for sorting (good enough for small r)
   return rows.map(r => {
-    const dLat = (r.lat - lat) * 111.32;
-    const dLng = (r.lng - lng) * 111.32 * Math.cos(lat * Math.PI / 180);
+    const rLat = parseFloat(r.lat);
+    const rLng = parseFloat(r.lng);
+    const dLat = (rLat - lat) * 111.32;
+    const dLng = (rLng - lng) * 111.32 * Math.cos(lat * Math.PI / 180);
     const distanceKm = Math.sqrt(dLat * dLat + dLng * dLng);
-    return { ...r, coords: { lat: r.lat, lng: r.lng }, distanceKm: distanceKm.toFixed(2) };
+    return { ...r, coords: { lat: rLat, lng: rLng }, distanceKm: distanceKm.toFixed(2) };
   }).sort((a, b) => a.distanceKm - b.distanceKm);
 };
 
