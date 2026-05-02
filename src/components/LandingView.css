@@ -138,6 +138,17 @@
 .spread-item {
   display: flex;
   flex-direction: column;
+  padding: var(--space-xl);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid transparent;
+  transition: all var(--transition-normal);
+}
+
+.spread-item:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+  transform: translateY(-4px);
 }
 
 .spread-item h2 {
@@ -146,6 +157,7 @@
   color: var(--border-highlight);
   margin-bottom: var(--space-lg);
   font-family: 'JetBrains Mono', monospace;
+  opacity: 0.6;
 }
 
 .spread-content h3 {
@@ -261,4 +273,53 @@
     justify-content: center;
     gap: var(--space-3xl);
   }
+}
+
+/* Landing Map Markers */
+.landing-marker-container {
+  pointer-events: none;
+}
+
+.landing-marker-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transform: translate(-50%, -100%);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+}
+
+.landing-marker-desc {
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 1px 5px;
+  border-radius: 2px;
+  white-space: nowrap;
+  backdrop-filter: blur(2px);
+}
+
+.landing-marker-dot {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: white;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid #E5E7EB;
+  white-space: nowrap;
+}
+
+[data-theme='dark'] .landing-marker-desc {
+  background: rgba(0, 0, 0, 0.6);
+  color: #A09F9A;
+}
+
+[data-theme='dark'] .landing-marker-dot {
+  background: #1A1A18;
+  color: #F7F6F2;
+  border-color: #262624;
 }

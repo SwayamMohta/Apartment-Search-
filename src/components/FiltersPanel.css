@@ -87,7 +87,7 @@
 
 .input-with-icon input {
   width: 100%;
-  background: var(--bg-primary);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border-color);
   padding: 12px 14px 12px 28px;
   border-radius: var(--radius-md);
@@ -107,8 +107,8 @@
 .pill-control {
   display: flex;
   gap: 8px;
-  padding: 4px;
-  background: var(--bg-primary);
+  padding: 6px;
+  background: var(--bg-tertiary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-full);
 }

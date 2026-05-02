@@ -11,12 +11,11 @@
 
 .listing-strip {
   display: flex;
-  background: var(--bg-overlay);
-  backdrop-filter: blur(24px) saturate(180%);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   transition: all var(--transition-normal);
   position: relative;
   min-height: 200px;

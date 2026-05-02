@@ -65,13 +65,13 @@
 .editorial-price-pill {
   background: var(--accent-color);
   color: var(--bg-primary);
-  padding: 6px 14px;
+  padding: 6px 16px;
   border-radius: 9999px;
   font-size: 11px;
   font-weight: 800;
   white-space: nowrap;
-  box-shadow: var(--shadow-sm);
-  border: 1.5px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 1.5px solid rgba(255,255,255,0.2);
   position: relative;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
@@ -79,7 +79,12 @@
   justify-content: center;
   pointer-events: auto;
   cursor: pointer;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+}
+
+[data-theme='dark'] .editorial-price-pill {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Needle Tip */

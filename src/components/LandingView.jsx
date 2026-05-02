@@ -8,10 +8,17 @@ import { useTheme } from '../context/ThemeContext';
 import './LandingView.css';
 
 // Create custom editorial markers for the landing preview
-const createPinIcon = (price) => {
+const createPinIcon = (pin) => {
   return L.divIcon({
-    className: 'custom-editorial-marker landing-marker',
-    html: `<div class="marker-dot"><span>&#8377;${price}</span></div>`,
+    className: 'landing-marker-container',
+    html: `
+      <div class="landing-marker-wrapper">
+        <div class="landing-marker-desc">${pin.desc}</div>
+        <div class="landing-marker-dot">
+          <span>&#8377;${pin.price}</span>
+        </div>
+      </div>
+    `,
     iconSize: [0, 0],
     iconAnchor: [0, 0]
   });
@@ -84,7 +91,7 @@ export default function LandingView({ onExplore, onViewAll }) {
                 } />
                 <SlowPanMap />
                 {PREVIEW_PINS.map(pin => (
-                  <Marker key={pin.id} position={pin.pos} icon={createPinIcon(pin.price)} />
+                  <Marker key={pin.id} position={pin.pos} icon={createPinIcon(pin)} />
                 ))}
               </MapContainer>
             </div>
