@@ -89,7 +89,7 @@ CREATE TABLE audit_logs (
 
 -- POIs Table (Points of Interest)
 CREATE TABLE pois (
-    id         SERIAL PRIMARY KEY,
+    id         BIGSERIAL PRIMARY KEY,
     type       VARCHAR(100) NOT NULL,
     name       VARCHAR(255) NOT NULL,
     lat        DOUBLE PRECISION NOT NULL,
