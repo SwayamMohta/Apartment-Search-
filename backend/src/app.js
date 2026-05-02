@@ -30,7 +30,7 @@ const createApp = () => {
 
   // ── CORS ─────────────────────────────────────────────────────────
   app.use(cors({
-    origin: env.FRONTEND_URL,
+    origin: env.FRONTEND_URL.replace(/\/$/, ''), // Strip trailing slash if present
     credentials: true,                      // allow cookies
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
