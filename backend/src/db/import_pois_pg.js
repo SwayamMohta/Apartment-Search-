@@ -9,7 +9,7 @@ const SOURCE_DB_PATH = path.join(__dirname, '..', '..', '..', 'pois.db');
 
 async function importPoisPg() {
   console.log('🚀 Starting POI import (SQLite to PostgreSQL)...');
-  
+
   let sqliteDb;
   try {
     sqliteDb = new Database(SOURCE_DB_PATH, { fileMustExist: true });
@@ -31,25 +31,25 @@ async function importPoisPg() {
     // Insert POIs in batches
     let imported = 0;
     const batchSize = 500;
-    
+
     for (let i = 0; i < pois.length; i += batchSize) {
       const batch = pois.slice(i, i + batchSize);
-      
+
       const values = [];
       const params = [];
       let paramIndex = 1;
-      
+
       for (const poi of batch) {
         values.push(`($${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++}, $${paramIndex++})`);
         params.push(poi.id, poi.type, poi.name, poi.lat, poi.lng);
       }
-      
+
       const query = `
         INSERT INTO pois (id, type, name, lat, lng)
         VALUES ${values.join(', ')}
         ON CONFLICT (id) DO NOTHING
       `;
-      
+
       await db.run(query, params);
       imported += batch.length;
       console.log(`⏳ Imported ${imported}/${pois.length} POIs...`);
