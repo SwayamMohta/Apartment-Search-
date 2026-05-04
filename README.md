@@ -1,156 +1,126 @@
-# Elevé — Curated Living, Defined.
+# Elevé: Advanced Residential Discovery Platform
 
-![Elevé Hero Banner](file:///C:/Users/mohta/.gemini/antigravity/brain/e9331a88-d6c1-4420-9b8a-e871b8a4b843/eleve_hero_banner_1777898374479.png)
+[Live Demo](https://apartmentsearch.vercel.app/)
 
-Elevé is a high-end, full-stack residential discovery platform designed for the modern urban explorer. It merges sophisticated editorial design with powerful geographic search capabilities, allowing users to find their next home through an interactive, data-rich experience.
-
----
-
-## ✨ Key Features
-
-- **🗺️ Intelligent Map Discovery**: Custom Leaflet-based interactive map with real-time price markers and theme-aware tile switching.
-- **🔍 Advanced Filtering**: A refined spotlight-style filter system for price, bedroom count, and premium amenities.
-- **🏢 Deep Property Insights**: Detailed views featuring high-resolution galleries, amenity lists, and localized **Points of Interest (POIs)**.
-- **🔐 Seamless Authentication**: Robust JWT-based security with silent token refreshing and role-based access control.
-- **❤️ Personal Collections**: Curate your favorite listings with persistent, user-specific saved collections.
-- **🛠️ Executive Admin Dashboard**: Comprehensive management interface for property listings, user roles, and asset uploads.
-- **🌓 Dynamic Theming**: A meticulously crafted design system supporting both premium Light and deep Dark modes.
+Elevé is a sophisticated full-stack residential discovery application designed for high-precision geographic property searches. The platform integrates an interactive geospatial mapping interface with a curated property database, providing users with real-time availability, detailed amenity breakdowns, and localized proximity analysis for essential services.
 
 ---
 
-## 🛠️ Technical Excellence
+## Core Functionality
 
-### Frontend Architecture
-| Technology | Role |
-| :--- | :--- |
-| **React 19** | Core UI logic and state management |
-| **Vite 7** | Ultra-fast build pipeline and development environment |
-| **React Leaflet** | Geospatial visualization and interactive mapping |
-| **Framer Motion** | Fluid, micro-interaction driven animations |
-| **Tailwind CSS** | Utility-first styling for a custom design system |
-| **Lucide React** | Consistent, professional iconography |
+### Geospatial Mapping and Navigation
+The application utilizes a custom Leaflet-based mapping engine that renders property listings as interactive price-markers. The map supports dynamic tile-layer switching synchronized with the application's theme system and implements real-time coordinate-based filtering.
 
-### Backend Infrastructure
-| Technology | Role |
-| :--- | :--- |
-| **Node.js & Express** | Scalable REST API and business logic |
-| **PostgreSQL (Supabase)** | High-performance, scalable data storage |
-| **JWT & Bcrypt** | Secure authentication and password hashing |
-| **Zod** | Type-safe schema validation for all requests |
-| **Winston & Morgan** | Enterprise-grade logging and monitoring |
-| **Multer** | Secure file and image processing |
+### Advanced Search and Filtering
+Users can perform granular searches based on multiple parameters, including price ranges, bedroom configurations (BHK), and specific amenities. The filtering system is executed through a reactive UI that triggers server-side query optimizations.
+
+### Comprehensive Property Profiles
+Each listing provides an extensive data dossier, including high-resolution image galleries, detailed specifications, and a proximity report generated via geospatial analysis of nearby Points of Interest (POIs) such as schools, hospitals, and transit hubs.
+
+### Secure Authentication and Session Management
+The platform implements a stateless JWT (JSON Web Token) authentication architecture. It features a dual-token system (Access and Refresh tokens) with secure httpOnly cookie storage, ensuring robust protection against common web vulnerabilities.
+
+### Administrative Management Suite
+A role-protected administrative dashboard allows authorized personnel to manage the property inventory. This includes full CRUD (Create, Read, Update, Delete) capabilities, image asset management, and user oversight.
 
 ---
 
-## 🏗️ System Architecture
+## Technical Specifications
 
-Elevé follows a clean, modular architecture designed for maintainability and performance:
+### Frontend Layer
+- **Framework**: React 19
+- **Build System**: Vite 7
+- **Routing**: React Router 7
+- **Mapping**: Leaflet and React-Leaflet
+- **Animation**: Framer Motion 12
+- **State Management**: React Context API
+- **Styling**: Tailwind CSS and Vanilla CSS Design Tokens
+- **Icons**: Lucide React
 
-1.  **Presentation Layer (Frontend)**: A component-based React application utilizing Context API for global state (Auth, Theme) and custom hooks for API interaction.
-2.  **Logic Layer (Service/Controller)**: The backend is structured using the **Controller-Service-Repository** pattern, ensuring strict separation of concerns between HTTP handling, business logic, and data access.
-3.  **Data Layer (Repository)**: Optimized SQL queries with specialized logic for **Geographic Bounding Box** and **Radius Search**, integrated with a custom Points of Interest database.
+### Backend Layer
+- **Runtime**: Node.js
+- **Framework**: Express
+- **Database**: PostgreSQL (Supabase)
+- **Authentication**: JWT and Bcrypt
+- **Validation**: Zod
+- **Logging**: Winston and Morgan
+- **Middleware**: Helmet, CORS, Express-Rate-Limit
 
 ---
 
-## 🚀 Getting Started
+## System Architecture
+
+Elevé is engineered using a modular Three-Tier Architecture, emphasizing separation of concerns and scalability.
+
+### Presentation Layer
+A Single Page Application (SPA) that manages user interactions, geospatial rendering, and local state synchronization. It communicates with the API via an asynchronous Axios-based service layer.
+
+### Application Logic Layer
+The backend is structured according to the Controller-Service-Repository design pattern:
+- **Controllers**: Handle HTTP request parsing and response formatting.
+- **Services**: Orchestrate business logic and data processing.
+- **Repositories**: Execute optimized SQL queries and manage data persistence.
+
+### Data Persistence Layer
+Utilizes a PostgreSQL database hosted on Supabase. The schema is optimized for relational integrity and features specialized geospatial indices for efficient proximity calculations.
+
+---
+
+## Geospatial Implementation
+
+The platform employs advanced geospatial logic to enhance the discovery experience:
+1. **Bounding Box Queries**: The backend calculates coordinate boundaries based on the user's map viewport to fetch relevant listings efficiently.
+2. **Radius Analysis**: Utilizes the Haversine formula to calculate the exact distance between properties and localized Points of Interest within a 2km radius.
+3. **Proximity Scoring**: Dynamically ranks listings based on their accessibility to essential urban infrastructure.
+
+---
+
+## Installation and Setup
 
 ### Prerequisites
-- **Node.js** v18 or higher
-- **npm** or **yarn**
+- Node.js (version 18 or higher)
+- npm or yarn package manager
 
-### 1. Initialize the Backend
-Navigate to the backend directory and install dependencies:
-```bash
-cd backend
-npm install
-```
-Configure your environment variables:
-```bash
-cp .env.example .env
-```
-Run migrations and seed the initial dataset:
-```bash
-npm run migrate
-npm run seed
-```
-Launch the development server:
-```bash
-npm run dev
-```
+### Backend Configuration
+1. Navigate to the backend directory: `cd backend`
+2. Install dependencies: `npm install`
+3. Create a `.env` file based on `.env.example` and provide the `DATABASE_URL`, `JWT_ACCESS_SECRET`, and `JWT_REFRESH_SECRET`.
+4. Initialize the database: `npm run migrate`
+5. Optional: Seed sample data: `npm run seed`
+6. Start the server: `npm run dev`
 
-### 2. Initialize the Frontend
-From the project root, install dependencies and start the Vite server:
-```bash
-npm install
-npm run dev
-```
-The platform will be accessible at `http://localhost:5173`.
+### Frontend Configuration
+1. Navigate to the root directory.
+2. Install dependencies: `npm install`
+3. Start the development environment: `npm run dev`
+
+The application will be accessible at `http://localhost:5173` by default.
 
 ---
 
-## 🔑 Environment Variables Reference
+## API Reference
 
-| Variable | Required | Default | Description |
-|---|---|---|---|
-| `DATABASE_URL` | Yes | — | PostgreSQL connection string (Supabase) |
-| `PORT` | No | `3001` | Backend server port |
-| `NODE_ENV` | No | `development` | Runtime environment |
-| `FRONTEND_URL` | Yes | — | Allowed CORS origin |
-| `JWT_ACCESS_SECRET` | Yes | — | Secret for signing access tokens |
-| `JWT_REFRESH_SECRET` | Yes | — | Secret for signing refresh tokens |
+### Authentication Endpoints
+- `POST /api/v1/auth/register`: User registration.
+- `POST /api/v1/auth/login`: Session initialization.
+- `POST /api/v1/auth/refresh`: Token renewal.
+- `POST /api/v1/auth/logout`: Session termination.
 
----
-
-## 📖 API Documentation
-
-All API endpoints are versioned under `/api/v1`.
-
-### Authentication
-- `POST /auth/register` — Create a new identity.
-- `POST /auth/login` — Secure session initialization.
-- `POST /auth/refresh` — Seamless token renewal.
-- `POST /auth/logout` — Secure session termination.
-
-### Property Management
-- `GET /apartments` — Discovery feed with advanced filtering.
-- `GET /apartments/:id` — Full property dossier + nearby POIs.
-- `POST /apartments` — [Admin] Listing creation.
-- `PUT /apartments/:id` — [Admin] Listing refinement.
-- `DELETE /apartments/:id` — [Admin] Listing removal.
-
-### User Interaction
-- `GET /users/me/saved` — Retrieve personal collection.
-- `POST /users/me/saved/:id` — Curate a property.
-- `DELETE /users/me/saved/:id` — Remove from collection.
+### Apartment Endpoints
+- `GET /api/v1/apartments`: Retrieve filtered listings.
+- `GET /api/v1/apartments/:id`: Retrieve detailed property data and nearby POIs.
+- `POST /api/v1/apartments`: Create new listing (Admin only).
+*Additional CRUD operations available for authorized administrators.*
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
-```text
-├── src/                        # React Frontend (Vite)
-│   ├── components/             # Modular UI components
-│   ├── context/                # Auth & Theme state management
-│   ├── api/                    # Axios-based service modules
-│   └── App.jsx                 # Routing and Map Orchestration
-├── backend/
-│   ├── src/
-│   │   ├── modules/            # Domain-driven feature modules (Auth, Apartments, etc.)
-│   │   ├── middleware/         # Security, Auth & Validation guards
-│   │   └── config/             # DB and Environment configuration
-│   └── PostgreSQL (Supabase)   # Primary application database
-└── pois.db                     # Geospatial Points of Interest database (Local Reference)
-```
+- `src/`: React frontend source code and component library.
+- `backend/`: Node.js/Express server and domain modules.
+- `docs/`: Technical documentation including SRS and SDS.
+- `pois.db`: Local geospatial database reference.
 
 ---
 
-## 🗺️ Geospatial Intelligence
-
-Elevé doesn't just show listings; it understands the neighborhood. The backend utilizes a optimized **Haversine-based calculation** and **Bounding Box filtering** to:
-1.  Instantly update the map view as you pan/zoom.
-2.  Calculate the exact distance to schools, hospitals, and parks within a 2km radius.
-3.  Rank properties based on their "Proximity Score" to essential services.
-
----
-
-*Elevé — Redefining the search for home.*
+Elevé - Professional Residential Discovery Systems.
